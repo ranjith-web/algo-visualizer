@@ -29,11 +29,11 @@ function App() {
 	}
 
 	// States
-	const [algo, setAlgo] = useState('quickSort')
+	const [algo,] = useState('quickSort')
 	const [len, setLength] = useState(100)
 	const [blocks, setBlocks] = useState([])
 	const [sorting, setSorting] = useState(false)
-	const [completed, setCompleted] = useState(true)
+	const [, setCompleted] = useState(true)
 	const [speed, setSpeed] = useState(250)
 	const [compare, setCompare] = useState([])
 	const [swap, setSwap] = useState([])
@@ -43,11 +43,6 @@ function App() {
 	useEffect(() => {
 		generateRandomArray(len)
 	}, [len, algo])
-
-	// setting the selected algorithm
-	const handleAlgo = (event) => {
-		setAlgo(event.target.value)
-	}
 
 	// handling the length of the array
 	const handleLength = (evt) => {
