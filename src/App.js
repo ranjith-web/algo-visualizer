@@ -7,6 +7,7 @@ import mergeSort from './components/algorithm/mergeSort';
 import insertionSort from './components/algorithm/insertionSort';
 import selectionSort from './components/algorithm/selection';
 import bubbleSort from './components/algorithm/bubble';
+import Timer from './components/Timer';
 
 function App() {
   // Generating shuffled array of 1 to len
@@ -38,11 +39,20 @@ function App() {
 	const [compare, setCompare] = useState([])
 	const [swap, setSwap] = useState([])
 	const [sortedIndex, setSortedIndex] = useState([])
+	const [start, setStart] = useState(false);
+	const [stop, setStop] = useState(false);
 
 	// Generating random array every time the length is changed by th user
 	useEffect(() => {
 		generateRandomArray(len)
 	}, [len, algo])
+
+	useEffect(() => {
+		if(sortedIndex.length > 0 && sortedIndex.length === blocks.length){
+			setStart(false);
+			setStop(true);
+		}
+	}, [blocks, sortedIndex])
 
 	// handling the length of the array
 	const handleLength = (evt) => {
@@ -90,7 +100,7 @@ function App() {
 		}
 
 		setSorting(true)
-
+		setStart(true);
 		algo === 'bubbleSort' ? sortAccOrder(bubbleSort(blocks)) : 
 		algo === 'selectionSort' ?  sortAccOrder(selectionSort(blocks)) :
 		algo === 'insertionSort' ? sortAccOrder(insertionSort(blocks)) :
@@ -105,11 +115,12 @@ function App() {
 		<div id="navbarDiv">
 			<Headers action={{handleSort, handleSpeed, handleLength, generateRandomArray: () => generateRandomArray(len)}} sorting={sorting}/>
 		</div>
-      <Container
-      blocks={blocks} 
-      compare={sorting && compare}
-      swap={sorting && swap}
-      sorted={sortedIndex}  />
+		<Timer {...{start, stop}} />
+		<Container
+		blocks={blocks} 
+		compare={sorting && compare}
+		swap={sorting && swap}
+		sorted={sortedIndex}  />
     </div>
   );
 }

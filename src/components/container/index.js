@@ -1,6 +1,6 @@
 import "./styles.css";
 
-const Container = ({blocks, compare, swap, sorted}) => {
+const Container = ({blocks, compare, swap, sorted, mesureTime}) => {
     const array = blocks;
     const numWidth = Math.floor(document.documentElement.offsetWidth / (array.length * 3));
     const width = `${numWidth}px`;
@@ -22,6 +22,7 @@ const Container = ({blocks, compare, swap, sorted}) => {
             12 : numWidth > 20 ?
                 10 : 8;
     const fontSize = `${numFont}px`;
+    
     return(
         <div id="bodyContainer">
             { array.length ? array.map((number, index) => {
